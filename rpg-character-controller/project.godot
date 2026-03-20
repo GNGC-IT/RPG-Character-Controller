@@ -83,6 +83,10 @@ Interact={
 ]
 }
 
+[physics]
+
+3d/default_gravity=15.133000000000003
+
 [rendering]
 
 renderer/rendering_method="mobile"
