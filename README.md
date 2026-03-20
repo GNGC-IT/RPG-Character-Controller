@@ -75,4 +75,4 @@ This controller uses custom input actions, the easiest way to implement them in 
 
 ## Credits
 
-Full credit to Kay Lousberg at KayKit for the character models and animations. Visit https://kaylousberg.itch.io/ for more of their awesome work making gorgeous themed assets. The assets used are all CC0.
+Full credit to Kay Lousberg at KayKit for the character models and animations. Visit https://kaylousberg.itch.io/ for more of their awesome work making gorgeous themed assets. The assets used are all CC0. Any other of their KayKit Medium Rig characters should work with this controller perfectly
