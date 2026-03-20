@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://3l4l7ag2xngv"]
 
 [ext_resource type="Script" uid="uid://bdoqlmhay3wkg" path="res://Scripts/Player.gd" id="1_coq8p"]
-[ext_resource type="PackedScene" uid="uid://cs6boitodo521" path="res://KayKit_Adventurers_2.0_FREE/Characters/Knight.glb" id="2_2nij2"]
 [ext_resource type="Script" uid="uid://dmh88glqll8v2" path="res://Scripts/dmgzone.gd" id="2_ia1lp"]
 [ext_resource type="AnimationLibrary" uid="uid://bhy1voj5mwd8b" path="res://KayKit_Adventurers_2.0_FREE/Player_anims.res" id="3_7cbxl"]
+[ext_resource type="PackedScene" uid="uid://dqjaep1aio3ri" path="res://KayKit_Adventurers_2.0_FREE/Characters/Mage.glb" id="3_coq8p"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ia1lp"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -50,9 +50,7 @@ size = Vector3(20, 0.1, 20)
 [node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("model")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6168375, 0, 0.5075245)
 script = ExtResource("1_coq8p")
-model = NodePath("Knight")
-
-[node name="Knight" parent="Player" instance=ExtResource("2_2nij2")]
+model = NodePath("Mage")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 root_node = NodePath("")
@@ -70,6 +68,8 @@ transform = Transform3D(-1, -2.1149484e-08, 8.482595e-08, 0, 0.9702957, 0.241921
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26933, 0)
 shape = SubResource("CapsuleShape3D_hrlh7")
+
+[node name="Mage" parent="Player" instance=ExtResource("3_coq8p")]
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.1, 8)
