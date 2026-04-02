@@ -23,7 +23,7 @@ func _ready():
 	anim.root_node = model.get_path()
 	states = {
 		StateName.SPAWN : preload("res://Scripts/PlayerStates/player_spawn.gd").new(),
-		StateName.MOVEMENT : preload("res://Scripts/PlayerStates/player_movement.gd").new(),
+		StateName.MOVEMENT : preload("res://Scripts/PlayerStates/new_player_movement.gd").new(),
 		StateName.DEAD : preload("res://Scripts/PlayerStates/player_dead.gd").new(),
 		StateName.DAMAGED: preload("res://Scripts/PlayerStates/player_damaged.gd").new(),
 		

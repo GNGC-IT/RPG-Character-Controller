@@ -71,7 +71,6 @@ func physics_process(player: Player, delta):
 		
 	last_state = move_state
 
-				
 func _state_idle(player : Player, delta, input_dir):
 	if last_state != move_state:
 		player.anim.play("med_anims/Idle_A")
@@ -79,7 +78,6 @@ func _state_idle(player : Player, delta, input_dir):
 	if player.is_on_floor() and input_dir != Vector2.ZERO:
 		move_state = MoveState.RUN
 		_state_run(player, delta, input_dir)
-	
 	
 func _state_run(player : Player, delta, input_dir):
 	if last_state != move_state:
@@ -107,9 +105,11 @@ func _state_land(player : Player, delta):
 	if last_state != move_state:
 		player.anim.play("med_anims/Jump_Land")
 		print("start jump end")
+	if player.velocity != Vector3.ZERO:
+		print("jump to move")
+		move_state = MoveState.RUN
 		
 	
-
 func animation_finished(player:Player, anim_name):
 	match move_state:
 		MoveState.JUMP_START:
@@ -117,6 +117,12 @@ func animation_finished(player:Player, anim_name):
 		MoveState.LAND:
 			move_state = MoveState.IDLE
 			print("finished jump end")
+
+func change_state():
+	var move_state = MoveState.IDLE
+	
+
+
 
 
 # Helper function to calculate the 3D movement direction relative to the camera
