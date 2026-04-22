@@ -26,10 +26,9 @@ func _ready():
 		StateName.MOVEMENT : preload("res://Scripts/PlayerStates/new_player_movement.gd").new(),
 		StateName.DEAD : preload("res://Scripts/PlayerStates/player_dead.gd").new(),
 		StateName.DAMAGED: preload("res://Scripts/PlayerStates/player_damaged.gd").new(),
-		
 	}
 
-	changeState(StateName.SPAWN)  #Set the starting state for the laser
+	changeState(StateName.SPAWN)
 
 func _physics_process(delta):
 	currentState.physics_process(self, delta)
@@ -74,7 +73,6 @@ func _take_damage(dmg:int):
 	else:
 		changeState(StateName.DAMAGED)
 		
-
 func _unhandled_input(event):
 	if event.is_action_pressed("Interact") and interact_target != null:
 		interact_target.interact()
