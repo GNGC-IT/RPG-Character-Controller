@@ -20,6 +20,7 @@ enum StateName {SPAWN, MOVEMENT, DEAD, DAMAGED}
 var currentState : PlayerState = null
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	anim.root_node = model.get_path()
 	states = {
 		StateName.SPAWN : preload("res://Scripts/PlayerStates/player_spawn.gd").new(),
