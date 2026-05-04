@@ -1,7 +1,7 @@
 extends PlayerState
 
 func enter(player: Player):
-	player.anim.current_animation = "med_anims/Spawn_Ground"
+	player._set_anim("spawn")
 	pass
 
 func exit(player: Player):

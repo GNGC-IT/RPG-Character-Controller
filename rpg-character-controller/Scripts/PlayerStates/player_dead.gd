@@ -1,7 +1,7 @@
 extends PlayerState
 
 func enter(player):
-	player.anim.current_animation = "med_anims/Death_A"
+	player._set_anim("death")
 	player.velocity = Vector3.ZERO
 	pass
 

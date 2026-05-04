@@ -3,7 +3,7 @@ extends PlayerState
 const SPEED = 8.0
 const JUMP_VELOCITY = 6
 
-enum MoveState { IDLE, RUN, JUMP_START, JUMP_AIR, LAND }
+enum MoveState { IDLE, RUN}
 
 var move_state = MoveState.IDLE
 var last_state = null
@@ -33,17 +33,6 @@ func physics_process(player: Player, delta):
 	# Gravity
 	if not player.is_on_floor():
 		player.velocity += player.get_gravity() * delta
-		
-		if move_state != MoveState.JUMP_START:
-			change_state(MoveState.JUMP_AIR)
-
-	# Jump
-	if Input.is_action_just_pressed("jump") and player.is_on_floor():
-		change_state(MoveState.JUMP_START)
-
-	# Landing detection
-	if player.is_on_floor() and move_state == MoveState.JUMP_AIR:
-		change_state(MoveState.LAND)
 
 	var input_dir = Input.get_vector("move_left", "move_right", "move_back", "move_forward")
 	var direction = _calculate_movement_direction(player, input_dir)
@@ -54,15 +43,6 @@ func physics_process(player: Player, delta):
 
 		MoveState.RUN:
 			_state_run(player, delta, input_dir, was_just_entered)
-
-		MoveState.JUMP_START:
-			_state_jump_start(player, was_just_entered)
-
-		MoveState.JUMP_AIR:
-			_state_jump_air(player, was_just_entered)
-
-		MoveState.LAND:
-			_state_land(player, input_dir, was_just_entered)
 
 
 	if direction != Vector3.ZERO:
@@ -96,34 +76,6 @@ func _state_run(player : Player, delta, input_dir, entered):
 	if input_dir == Vector2.ZERO:
 		change_state(MoveState.IDLE)
 
-
-func _state_jump_start(player : Player, entered):
-	if entered:
-		player.velocity.y = JUMP_VELOCITY
-		player._set_anim("jump_start")
-
-
-func _state_jump_air(player : Player, entered):
-	if entered:
-		player._set_anim("jump_idle")
-
-
-func _state_land(player : Player, input_dir, entered):
-	if entered:
-		player._set_anim("jump_land")
-
-	# OPTIONAL: allow early movement interrupt
-	if input_dir != Vector2.ZERO:
-		change_state(MoveState.RUN)
-
-
-func animation_finished(player: Player, anim_name):
-	match move_state:
-		MoveState.JUMP_START:
-			change_state(MoveState.JUMP_AIR)
-
-		MoveState.LAND:
-			change_state(MoveState.IDLE)
 
 
 func _calculate_movement_direction(player: Player, input_dir: Vector2) -> Vector3:

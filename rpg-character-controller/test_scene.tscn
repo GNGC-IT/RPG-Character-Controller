@@ -1,9 +1,7 @@
 [gd_scene format=3 uid="uid://3l4l7ag2xngv"]
 
-[ext_resource type="Script" uid="uid://bdoqlmhay3wkg" path="res://Scripts/Player.gd" id="1_coq8p"]
 [ext_resource type="Script" uid="uid://dmh88glqll8v2" path="res://Scripts/dmgzone.gd" id="2_ia1lp"]
-[ext_resource type="AnimationLibrary" uid="uid://bhy1voj5mwd8b" path="res://KayKit_Adventurers_2.0_FREE/Player_anims.res" id="3_7cbxl"]
-[ext_resource type="PackedScene" uid="uid://ckvmfdj74mded" path="res://KayKit_Adventurers_2.0_FREE/Characters/Mannequin_Medium.glb" id="3_coq8p"]
+[ext_resource type="PackedScene" uid="uid://bk3bkpb0qpgf4" path="res://Scenes/Player_big.tscn" id="2_sasra"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ia1lp"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -17,10 +15,6 @@ background_mode = 2
 sky = SubResource("Sky_sasra")
 tonemap_mode = 2
 glow_enabled = true
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hrlh7"]
-radius = 0.59765625
-height = 2.5478516
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uhqqe"]
 albedo_color = Color(0.83137256, 0, 0, 1)
@@ -46,28 +40,6 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 use_collision = true
 size = Vector3(20, 0.1, 20)
-
-[node name="Player" type="CharacterBody3D" parent="." unique_id=282785211 node_paths=PackedStringArray("model")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6168375, 0, 0.5075245)
-script = ExtResource("1_coq8p")
-model = NodePath("Mannequin_Medium")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player" unique_id=1477770295]
-root_node = NodePath("")
-libraries/med_anims = ExtResource("3_7cbxl")
-
-[node name="CameraYaw" type="Node3D" parent="Player" unique_id=1056693419]
-
-[node name="CameraPitch" type="Node3D" parent="Player/CameraYaw" unique_id=339568434]
-
-[node name="Camera3D" type="Camera3D" parent="Player/CameraYaw/CameraPitch" unique_id=1270448978]
-transform = Transform3D(-1, -2.1149484e-08, 8.482595e-08, 0, 0.9702957, 0.2419219, -8.742278e-08, 0.2419219, -0.9702957, 0, 2.6348586, -3.3833628)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1740873762]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26933, 0)
-shape = SubResource("CapsuleShape3D_hrlh7")
-
-[node name="Mannequin_Medium" parent="Player" unique_id=1420220104 instance=ExtResource("3_coq8p")]
 
 [node name="Area3D" type="Area3D" parent="." unique_id=531300036]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.1, 8)
@@ -127,7 +99,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.505874, 2.348, 0)
 use_collision = true
 size = Vector3(3, 4.673, 3)
 
-[connection signal="animation_finished" from="Player/AnimationPlayer" to="Player" method="_animation_finished"]
+[node name="Player" parent="." unique_id=241903923 instance=ExtResource("2_sasra")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.354474, 5.3245738e-05, 1.5477123)
+
 [connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
 [connection signal="body_entered" from="Area3D2" to="Area3D2" method="_on_body_entered"]
 [connection signal="body_entered" from="Area3D3" to="Area3D3" method="_on_body_entered"]
