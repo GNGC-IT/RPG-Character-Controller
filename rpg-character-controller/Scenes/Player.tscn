@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://c45uewj4wn7aa"]
 
 [ext_resource type="Script" uid="uid://bdoqlmhay3wkg" path="res://Scripts/Player.gd" id="1_5o3rn"]
-[ext_resource type="PackedScene" uid="uid://desa3xha00u1h" path="res://KayKit_Adventurers_2.0_FREE/Characters/Ranger.glb" id="2_kne1u"]
-[ext_resource type="AnimationLibrary" uid="uid://bhy1voj5mwd8b" path="res://KayKit_Adventurers_2.0_FREE/Player_anims.res" id="3_gntrk"]
+[ext_resource type="AnimationLibrary" uid="uid://bhy1voj5mwd8b" path="res://Animations/med_anims.res" id="2_gntrk"]
+[ext_resource type="PackedScene" uid="uid://ckvmfdj74mded" path="res://Character_Models/Medium_Adventurers/Characters/Mannequin_Medium.glb" id="3_dewec"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hrlh7"]
 radius = 0.59765625
@@ -10,13 +10,11 @@ height = 2.5478516
 
 [node name="Player" type="CharacterBody3D" unique_id=27742316 node_paths=PackedStringArray("model")]
 script = ExtResource("1_5o3rn")
-model = NodePath("Ranger")
+model = NodePath("Mannequin_Medium")
 
-[node name="Ranger" parent="." unique_id=1230367395 instance=ExtResource("2_kne1u")]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=882232124]
-root_node = NodePath("../Ranger")
-libraries/med_anims = ExtResource("3_gntrk")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1122788035]
+root_node = NodePath("../Mannequin_Medium")
+libraries/med_anims = ExtResource("2_gntrk")
 
 [node name="CameraYaw" type="Node3D" parent="." unique_id=104320538]
 
@@ -28,5 +26,7 @@ transform = Transform3D(-1, -2.1149484e-08, 8.482595e-08, 0, 0.9702957, 0.241921
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1162121412]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26933, 0)
 shape = SubResource("CapsuleShape3D_hrlh7")
+
+[node name="Mannequin_Medium" parent="." unique_id=114144581 instance=ExtResource("3_dewec")]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_animation_finished"]

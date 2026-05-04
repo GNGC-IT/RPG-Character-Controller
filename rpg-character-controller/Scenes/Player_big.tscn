@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bk3bkpb0qpgf4"]
 
 [ext_resource type="Script" uid="uid://bdoqlmhay3wkg" path="res://Scripts/Player.gd" id="1_p661d"]
-[ext_resource type="PackedScene" uid="uid://0yg6saxwkift" path="res://Big_Guy/Characters/Mannequin_Large.glb" id="1_wq5hc"]
-[ext_resource type="AnimationLibrary" uid="uid://rasi173h4vsk" path="res://Big_Guy/Animations_Large/large_anims.res" id="3_30hi7"]
+[ext_resource type="PackedScene" uid="uid://0yg6saxwkift" path="res://Character_Models/Large_Mannequin/Mannequin_Large.glb" id="1_wq5hc"]
+[ext_resource type="AnimationLibrary" uid="uid://rasi173h4vsk" path="res://Animations/large_anims.res" id="3_30hi7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p661d"]
 radius = 0.7
