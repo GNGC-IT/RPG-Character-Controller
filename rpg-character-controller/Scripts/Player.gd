@@ -1,6 +1,31 @@
 extends CharacterBody3D
 class_name Player
 
+var ANIM_PROFILES = {
+	"default": {
+		"spawn"      : "med_anims/Spawn_Ground",
+		"idle"       : "med_anims/Idle_A",
+		"move"       : "med_anims/Running_A",
+		"jump_start" : "med_anims/Jump_Start",
+		"jump_idle"  : "med_anims/Jump_Idle",
+		"jump_land"  : "med_anims/Jump_Land",
+		"death"      : "med_anims/Death_A",
+		"hit"        : "med_anims/Hit_B"
+	},
+	"big_guy": {
+		"spawn"      : "large_anims/Flexing",
+		"idle"       : "large_anims/Idle_A",
+		"move"       : "large_anims/Running_A",
+		"jump_start" : "large_anims/Jump_Start",
+		"jump_idle"  : "large_anims/Jump_Idle",
+		"jump_land"  : "large_anims/Jump_Land",
+		"death"      : "large_anims/Death_A",
+		"hit"        : "large_anims/Hit_A"
+	}
+}
+
+@export_enum("default", "big_guy") var character_profile: String = "default"
+
 @onready var anim :AnimationPlayer = $AnimationPlayer
 @onready var camera = $CameraYaw/CameraPitch/Camera3D
 @onready var camera_yaw = $CameraYaw
@@ -24,11 +49,16 @@ func _ready():
 	anim.root_node = model.get_path()
 	states = {
 		StateName.SPAWN : preload("res://Scripts/PlayerStates/player_spawn.gd").new(),
-		StateName.MOVEMENT : preload("res://Scripts/PlayerStates/new_player_movement.gd").new(),
+		#StateName.MOVEMENT : preload("res://Scripts/PlayerStates/new_player_movement.gd").new(),
 		StateName.DEAD : preload("res://Scripts/PlayerStates/player_dead.gd").new(),
 		StateName.DAMAGED: preload("res://Scripts/PlayerStates/player_damaged.gd").new(),
 	}
-
+	
+	if character_profile == "default":
+		states[StateName.MOVEMENT] = preload("res://Scripts/PlayerStates/med_player_movement.gd").new()
+	elif character_profile == "big_guy":
+		states[StateName.MOVEMENT] = preload("res://Scripts/PlayerStates/big_player_movement.gd").new()
+		
 	changeState(StateName.SPAWN)
 
 func _physics_process(delta):
@@ -64,8 +94,11 @@ func changeState(newState):
 	currentState.enter(self)
 
 func _animation_finished(anim_name):
+	print(anim_name)
 	currentState.animation_finished(self, anim_name)
 
+func _set_anim(anim_name):
+	anim.play(ANIM_PROFILES[character_profile][anim_name])
 
 func _take_damage(dmg:int):
 	hp -= dmg

@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bk3bkpb0qpgf4"]
+
+[ext_resource type="Script" uid="uid://bdoqlmhay3wkg" path="res://Scripts/Player.gd" id="1_p661d"]
+[ext_resource type="PackedScene" uid="uid://0yg6saxwkift" path="res://Character_Models/Large_Mannequin/Mannequin_Large.glb" id="1_wq5hc"]
+[ext_resource type="AnimationLibrary" uid="uid://rasi173h4vsk" path="res://Animations/large_anims.res" id="3_30hi7"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p661d"]
+radius = 0.7
+height = 4.0
+
+[node name="Player" type="CharacterBody3D" unique_id=241903923 node_paths=PackedStringArray("model")]
+script = ExtResource("1_p661d")
+character_profile = "big_guy"
+model = NodePath("Mannequin_Large")
+
+[node name="Mannequin_Large" parent="." unique_id=1575422048 instance=ExtResource("1_wq5hc")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2115498904]
+root_node = NodePath("../Mannequin_Large")
+libraries/large_anims = ExtResource("3_30hi7")
+
+[node name="CameraYaw" type="Node3D" parent="." unique_id=586451310]
+
+[node name="CameraPitch" type="Node3D" parent="CameraYaw" unique_id=304872009]
+
+[node name="Camera3D" type="Camera3D" parent="CameraYaw/CameraPitch" unique_id=374717025]
+transform = Transform3D(-1, -2.1149482e-08, 8.482594e-08, 5.62789e-09, 0.95270926, 0.30388343, -8.724143e-08, 0.30388343, -0.95270926, 0, 4.265536, -3.9204636)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=381280122]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("CapsuleShape3D_p661d")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_animation_finished"]

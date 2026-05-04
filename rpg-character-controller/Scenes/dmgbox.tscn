@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://hw24tcdso3yx"]
+
+[ext_resource type="Script" uid="uid://dmh88glqll8v2" path="res://Scripts/dmgzone.gd" id="1_sp56g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uhqqe"]
+albedo_color = Color(0.83137256, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.83137256, 0.3882353, 0, 1)
+emission_energy_multiplier = 5.0
+emission_on_uv2 = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uhqqe"]
+size = Vector3(4, 0.2, 4)
+
+[node name="Lava" type="Area3D" unique_id=1055271519]
+script = ExtResource("1_sp56g")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=31098672]
+size = Vector3(4, 0.2, 4)
+material = SubResource("StandardMaterial3D_uhqqe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=565110488]
+shape = SubResource("BoxShape3D_uhqqe")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

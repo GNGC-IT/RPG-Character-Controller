@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://3l4l7ag2xngv"]
+
+[ext_resource type="PackedScene" uid="uid://hw24tcdso3yx" path="res://Scenes/dmgbox.tscn" id="1_r5l72"]
+[ext_resource type="PackedScene" uid="uid://bk3bkpb0qpgf4" path="res://Scenes/Player_big.tscn" id="2_r5l72"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ia1lp"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_sasra"]
+sky_material = SubResource("ProceduralSkyMaterial_ia1lp")
+
+[sub_resource type="Environment" id="Environment_coq8p"]
+background_mode = 2
+sky = SubResource("Sky_sasra")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Test Scene" type="Node3D" unique_id=1019889179]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1287171150]
+environment = SubResource("Environment_coq8p")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1646743121]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_energy = 0.34
+shadow_enabled = true
+
+[node name="Level" type="CSGBox3D" parent="." unique_id=2051277485]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+use_collision = true
+size = Vector3(20, 0.1, 20)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Level" unique_id=1778353313]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8602753, 2.3977573, 7.8859053)
+use_collision = true
+size = Vector3(14.339142, 4.67334, 4.0585938)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Level/CSGBox3D2" unique_id=1437694728]
+transform = Transform3D(0.9170601, -0.39874908, 0, 0.39874908, 0.9170601, 0, 0, 0, 1, -2.642, 2.073, 0)
+operation = 2
+size = Vector3(11.873, 4.464, 4.357422)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Level" unique_id=269654187]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8602753, 2.3977573, -7.9265776)
+use_collision = true
+size = Vector3(14.339142, 4.67334, 4.0585938)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Level/CSGBox3D3" unique_id=1589280928]
+transform = Transform3D(0.9170601, -0.39874908, 0, 0.39874908, 0.9170601, 0, 0, 0, 1, -2.642, 2.073, 0)
+operation = 2
+size = Vector3(11.873, 4.464, 4.357422)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Level" unique_id=943365222]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.505874, 2.398, 0)
+use_collision = true
+size = Vector3(3, 4.673, 3)
+
+[node name="Lava" type="Node3D" parent="." unique_id=1914309496]
+
+[node name="Lava" parent="Lava" unique_id=1055271519 instance=ExtResource("1_r5l72")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8451605, 0, -3.648684)
+
+[node name="Lava2" parent="Lava" unique_id=92115267 instance=ExtResource("1_r5l72")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.920315, 0, 3.6130865)
+
+[node name="Lava3" parent="Lava" unique_id=482154798 instance=ExtResource("1_r5l72")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.973709, 0, 7.991509)
+
+[node name="Player" parent="." unique_id=241903923 instance=ExtResource("2_r5l72")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.854249, 5.3245738e-05, -0.5305581)

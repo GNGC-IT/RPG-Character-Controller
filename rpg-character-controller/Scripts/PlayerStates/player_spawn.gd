@@ -1,7 +1,9 @@
 extends PlayerState
 
 func enter(player: Player):
-	player.anim.current_animation = "med_anims/Spawn_Ground"
+	if player.character_profile == "big_guy":
+		player.anim.speed_scale = 2
+	player._set_anim("spawn")
 	pass
 
 func exit(player: Player):
@@ -9,4 +11,6 @@ func exit(player: Player):
 
 
 func animation_finished(player:Player, anim_name):
+	if player.character_profile == "big_guy":
+		player.anim.speed_scale = 1
 	player.changeState(player.StateName.MOVEMENT)
