@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://3l4l7ag2xngv"]
 
-[ext_resource type="PackedScene" uid="uid://bk3bkpb0qpgf4" path="res://Scenes/Player_big.tscn" id="2_ia1lp"]
-[ext_resource type="PackedScene" uid="uid://hw24tcdso3yx" path="res://dmgbox.tscn" id="4_coq8p"]
+[ext_resource type="PackedScene" uid="uid://hw24tcdso3yx" path="res://Scenes/dmgbox.tscn" id="1_r5l72"]
+[ext_resource type="PackedScene" uid="uid://bk3bkpb0qpgf4" path="res://Scenes/Player_big.tscn" id="2_r5l72"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ia1lp"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -58,14 +58,14 @@ size = Vector3(3, 4.673, 3)
 
 [node name="Lava" type="Node3D" parent="." unique_id=1914309496]
 
-[node name="Lava" parent="Lava" unique_id=1055271519 instance=ExtResource("4_coq8p")]
+[node name="Lava" parent="Lava" unique_id=1055271519 instance=ExtResource("1_r5l72")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8451605, 0, -3.648684)
 
-[node name="Lava2" parent="Lava" unique_id=92115267 instance=ExtResource("4_coq8p")]
+[node name="Lava2" parent="Lava" unique_id=92115267 instance=ExtResource("1_r5l72")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.920315, 0, 3.6130865)
 
-[node name="Lava3" parent="Lava" unique_id=482154798 instance=ExtResource("4_coq8p")]
+[node name="Lava3" parent="Lava" unique_id=482154798 instance=ExtResource("1_r5l72")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.973709, 0, 7.991509)
 
-[node name="Player" parent="." unique_id=241903923 instance=ExtResource("2_ia1lp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.92404, 5.3722575e-05, -0.7086005)
+[node name="Player" parent="." unique_id=241903923 instance=ExtResource("2_r5l72")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.854249, 5.3245738e-05, -0.5305581)

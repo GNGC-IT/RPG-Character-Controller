@@ -55,7 +55,7 @@ func _ready():
 	}
 	
 	if character_profile == "default":
-		states[StateName.MOVEMENT] = preload("res://Scripts/PlayerStates/new_player_movement.gd").new()
+		states[StateName.MOVEMENT] = preload("res://Scripts/PlayerStates/med_player_movement.gd").new()
 	elif character_profile == "big_guy":
 		states[StateName.MOVEMENT] = preload("res://Scripts/PlayerStates/big_player_movement.gd").new()
 		
