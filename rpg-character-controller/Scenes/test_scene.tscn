@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://3l4l7ag2xngv"]
 
 [ext_resource type="PackedScene" uid="uid://hw24tcdso3yx" path="res://Scenes/dmgbox.tscn" id="1_r5l72"]
-[ext_resource type="PackedScene" uid="uid://bk3bkpb0qpgf4" path="res://Scenes/Player_big.tscn" id="2_r5l72"]
+[ext_resource type="PackedScene" uid="uid://c45uewj4wn7aa" path="res://Scenes/Player.tscn" id="2_r5l72"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ia1lp"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -67,5 +67,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.920315, 0, 3.6130865)
 [node name="Lava3" parent="Lava" unique_id=482154798 instance=ExtResource("1_r5l72")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.973709, 0, 7.991509)
 
-[node name="Player" parent="." unique_id=241903923 instance=ExtResource("2_r5l72")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.854249, 5.3245738e-05, -0.5305581)
+[node name="Player" parent="." unique_id=27742316 instance=ExtResource("2_r5l72")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.7459354, 2.6717864e-05, -2.3761134)

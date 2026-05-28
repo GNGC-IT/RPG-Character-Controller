@@ -3,14 +3,19 @@
 [ext_resource type="Script" uid="uid://bdoqlmhay3wkg" path="res://Scripts/Player.gd" id="1_5o3rn"]
 [ext_resource type="AnimationLibrary" uid="uid://bhy1voj5mwd8b" path="res://Animations/med_anims.res" id="2_gntrk"]
 [ext_resource type="PackedScene" uid="uid://ckvmfdj74mded" path="res://Character_Models/Medium_Adventurers/Characters/Mannequin_Medium.glb" id="3_dewec"]
+[ext_resource type="Script" uid="uid://l57qq7q22jep" path="res://Scripts/PlayerStates/med_player_movement.gd" id="4_52ee3"]
+[ext_resource type="Script" uid="uid://bwwukd55ytry7" path="res://Scripts/PlayerStates/player_damaged.gd" id="5_bhhdu"]
+[ext_resource type="Script" uid="uid://utj2a3y8321e" path="res://Scripts/PlayerStates/player_dead.gd" id="6_megsn"]
+[ext_resource type="Script" uid="uid://cygf0wnwthnaj" path="res://Scripts/PlayerStates/player_spawn.gd" id="7_yoq75"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hrlh7"]
 radius = 0.59765625
 height = 2.5478516
 
-[node name="Player" type="CharacterBody3D" unique_id=27742316 node_paths=PackedStringArray("model")]
+[node name="Player" type="CharacterBody3D" unique_id=27742316 node_paths=PackedStringArray("model", "initial_state")]
 script = ExtResource("1_5o3rn")
 model = NodePath("Mannequin_Medium")
+initial_state = NodePath("States/Spawn")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1122788035]
 root_node = NodePath("../Mannequin_Medium")
@@ -28,5 +33,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26933, 0)
 shape = SubResource("CapsuleShape3D_hrlh7")
 
 [node name="Mannequin_Medium" parent="." unique_id=114144581 instance=ExtResource("3_dewec")]
+
+[node name="States" type="Node" parent="." unique_id=1963815334]
+
+[node name="Movement" type="Node" parent="States" unique_id=1367684426]
+script = ExtResource("4_52ee3")
+
+[node name="Damaged" type="Node" parent="States" unique_id=1583283538]
+script = ExtResource("5_bhhdu")
+
+[node name="Dead" type="Node" parent="States" unique_id=170979385]
+script = ExtResource("6_megsn")
+
+[node name="Spawn" type="Node" parent="States" unique_id=1533375538]
+script = ExtResource("7_yoq75")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_animation_finished"]

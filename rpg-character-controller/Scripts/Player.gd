@@ -40,29 +40,42 @@ var controller_sensitivity = 2.5
 @export var hp = 3
 
 #State Management Variables
-var states = {}
-enum StateName {SPAWN, MOVEMENT, DEAD, DAMAGED}
-var currentState : PlayerState = null
+#var states = {}
+#enum StateName {SPAWN, MOVEMENT, DEAD, DAMAGED}
+#var currentState : PlayerState = null
+
+@export var initial_state: PlayerState
+var current_state: PlayerState
+var states: Dictionary = {}
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	anim.root_node = model.get_path()
-	states = {
-		StateName.SPAWN : preload("res://Scripts/PlayerStates/player_spawn.gd").new(),
-		#StateName.MOVEMENT : preload("res://Scripts/PlayerStates/new_player_movement.gd").new(),
-		StateName.DEAD : preload("res://Scripts/PlayerStates/player_dead.gd").new(),
-		StateName.DAMAGED: preload("res://Scripts/PlayerStates/player_damaged.gd").new(),
-	}
+	#states = {
+		#StateName.SPAWN : preload("res://Scripts/PlayerStates/player_spawn.gd").new(),
+		##StateName.MOVEMENT : preload("res://Scripts/PlayerStates/new_player_movement.gd").new(),
+		#StateName.DEAD : preload("res://Scripts/PlayerStates/player_dead.gd").new(),
+		#StateName.DAMAGED: preload("res://Scripts/PlayerStates/player_damaged.gd").new(),
+	#}
+	#
+	#if character_profile == "default":
+		#states[StateName.MOVEMENT] = preload("res://Scripts/PlayerStates/med_player_movement.gd").new()
+	#elif character_profile == "big_guy":
+		#states[StateName.MOVEMENT] = preload("res://Scripts/PlayerStates/big_player_movement.gd").new()
+		#
+	#changeState(StateName.SPAWN)
 	
-	if character_profile == "default":
-		states[StateName.MOVEMENT] = preload("res://Scripts/PlayerStates/med_player_movement.gd").new()
-	elif character_profile == "big_guy":
-		states[StateName.MOVEMENT] = preload("res://Scripts/PlayerStates/big_player_movement.gd").new()
-		
-	changeState(StateName.SPAWN)
+	for child in $States.get_children():
+		if child is PlayerState:
+			states[child.name.to_lower()] = child
+			child.player = self
+			
+	
+	if initial_state:
+		change_state(initial_state.name.to_lower())
 
 func _physics_process(delta):
-	currentState.physics_process(self, delta)
+	current_state.physics_process(delta)
 	move_and_slide()
 	
 func _process(delta):
@@ -85,17 +98,20 @@ func look_around(delta_x: float, delta_y: float):
 		deg_to_rad(-20),
 		deg_to_rad(40)
 	)
-
-func changeState(newState):
-	print("moving to " + StateName.keys()[newState])
-	if currentState:
-		currentState.exit(self)
-	currentState = states[newState]
-	currentState.enter(self)
+	
+func change_state(new_state_name : String):
+	print("moving to " + new_state_name)
+	if current_state:
+		current_state.exit()
+		
+	current_state = states.get(new_state_name.to_lower())
+	
+	if current_state:
+		current_state.enter()
 
 func _animation_finished(anim_name):
 	print(anim_name)
-	currentState.animation_finished(self, anim_name)
+	current_state.animation_finished( anim_name)
 
 func _set_anim(anim_name):
 	anim.play(ANIM_PROFILES[character_profile][anim_name])
@@ -103,9 +119,9 @@ func _set_anim(anim_name):
 func _take_damage(dmg:int):
 	hp -= dmg
 	if hp <= 0:
-		changeState(StateName.DEAD)
+		change_state("Dead")
 	else:
-		changeState(StateName.DAMAGED)
+		change_state("Damaged")
 		
 func _unhandled_input(event):
 	if event.is_action_pressed("Interact") and interact_target != null:
