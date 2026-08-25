@@ -19,13 +19,13 @@ func change_state(new_state):
 	state_just_entered = true
 
 
-func enter(player: Player):
+func enter():
 	move_state = MoveState.IDLE
 	last_state = null
 	state_just_entered = true
 
 
-func physics_process(player: Player, delta):
+func physics_process(delta):
 
 	var was_just_entered = state_just_entered
 	state_just_entered = false
@@ -117,7 +117,7 @@ func _state_land(player : Player, input_dir, entered):
 		change_state(MoveState.RUN)
 
 
-func animation_finished(player: Player, anim_name):
+func animation_finished(anim_name):
 	match move_state:
 		MoveState.JUMP_START:
 			change_state(MoveState.JUMP_AIR)
